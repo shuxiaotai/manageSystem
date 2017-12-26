@@ -1,0 +1,22 @@
+.userContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  .userRight{
+    flex: 7;
+    //background-color: #2ab27b;
+    padding-left: 39px;
+  }
+  .userInforTable {
+    width: 100%;
+    max-height: 400px;
+    margin-top: 10px;
+  }
+}
+
+.userImg{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+}
+

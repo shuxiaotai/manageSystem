@@ -1,0 +1,3 @@
+const PREFIX = 'SIDE_LAYOUT';
+
+export const CLOSE_SIDE_BAR = `${PREFIX}_CLOSE_SIDE_BAR`;

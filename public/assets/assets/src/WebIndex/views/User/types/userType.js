@@ -1,0 +1,19 @@
+const PREFIX = 'USER';
+
+export const FETCH_USER_INFOR = `${PREFIX}_FETCH_USER_INFOR`;
+
+export const CREATE_USER = `${PREFIX}_CREATE_USER`;
+
+export const FETCH_LOG_INFOR = `${PREFIX}_FETCH_LOG_INFOR`;
+
+export const FETCH_ROLES = `${PREFIX}_FETCH_ROLES`;
+
+export const FETCH_DEPARTMENTS = `${PREFIX}_FETCH_DEPARTMENTS`;
+
+export const DELETE_USER = `${PREFIX}_DELETE_USER`;
+
+export const CHECKED_USER = `${PREFIX}_CHECKED_USER`;
+
+export const FETCH_ROLES_INFOR = `${PREFIX}_FETCH_ROLES_INFOR`;
+
+export const PASS_USER = `${PREFIX}_PASS_USER`;

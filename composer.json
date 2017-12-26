@@ -1,0 +1,14 @@
+{
+  "require": {
+    "symfony/Validator": "^3.3",
+    "noahbuscher/macaw": "dev-master",
+    "illuminate/database": "*",
+    "filp/whoops": "*",
+    "nette/mail": "*"
+  },
+  "autoload": {
+    "classmap":[
+      "controller","model","service"
+    ]
+  }
+}

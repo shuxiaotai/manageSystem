@@ -1,0 +1,27 @@
+.container-index{
+    height:100%;
+    overflow: hidden;
+}
+.main-content{
+    width: 100%;
+    position: relative;
+    left:220px;
+    height: 100%;
+    top: 0;
+    background-color: #f3f3f4;
+    transition: all .3s ease-in-out;
+    &.close{
+      left: 0
+    }
+    .show-content{
+        position: relative;
+        padding-top: 50px;
+        max-width: 1000px;
+        min-height: 588px;
+        &.close{
+            //left: 110px;
+            max-width: 1228px;
+        }
+    }
+}
+

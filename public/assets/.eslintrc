@@ -1,0 +1,40 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "destructuring": true,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "react"
+  ],
+  "settings": {
+    "import/ignore": [
+      "node_modules"
+    ]
+  },
+  "rules": {
+    // "off" or "0"：表示这个规则关闭，
+    // "warn" or "1"：表示这个规则是一个警告处理
+    // "error" or "2"：表示这个规则是一个错误处理
+    "max-len" : 0,
+    "indent": ["error", 4],
+    "no-const-assign": 2,
+    "space-infix-ops": "error",
+    "object-curly-spacing": ["error", "always"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "arrow-spacing": "error",
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "space-before-blocks": "error",
+    "react/jsx-space-before-closing": 1,
+    "semi": "error"
+  }
+}
