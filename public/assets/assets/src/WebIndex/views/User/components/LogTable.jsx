@@ -5,7 +5,7 @@ import { Table, Popconfirm, message } from 'antd';
 import cookieUtil from '../../../../lib/cookieUtil';
 
 const pagination = {
-    defaultPageSize: 8
+    defaultPageSize: 11
 };
 
 let columns = [];

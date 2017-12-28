@@ -22,6 +22,12 @@ const axiosUtil = (method, url, data = {}, timeout = 8000) => {
                     return 403;  //用户已存在
                 case 500:
                     return 500;
+                case 407:
+                    return 407;  //等待审核
+                case 408:
+                    return 408;  //不能删除自己
+                case 409:
+                    return 409;  //审核确认添加后登录
                 }
             }
         })

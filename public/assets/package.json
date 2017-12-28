@@ -41,7 +41,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress",
+    "start": "webpack-dev-server --open --config webpack.dev.js",
     "test": "jest",
     "build": "webpack --progress --config ./webpack.config.js"
   },

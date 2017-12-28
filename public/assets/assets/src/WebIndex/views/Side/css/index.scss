@@ -12,8 +12,10 @@ body,html{
   width: 220px;
   height: 100%;
   transition: all .3s ease-in-out;
+  z-index: 2;
   &.close{
     width: 0;
+    z-index: -1;
   }
   .logo-wrap{
     background-color: #263949;
@@ -22,27 +24,32 @@ body,html{
     position: absolute;
     top: 0;
     transition: all .3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     &.close{
-      display: none;
+      width: 0;
     }
     .logo{
       width: 80px;
       height: 100px;
       margin: 30px auto;
+      transition: all .3s ease-in-out;
       &.close{
         width: 0;
       }
       img{
         width: 100%;
         border-radius: 40px;
+        transition: all .3s ease-in-out;
       }
       .userText{
         color: white;
         font-size: 15px;
         display: inline-block;
         margin: 0 auto;
-        padding-top: 10px;
-        padding-left: 15px;
+        padding-top: 6px;
         transition: all .3s ease-in-out;
         &.close{
           display: none;
@@ -81,19 +88,12 @@ body,html{
           font-size: 14px;
           color: white;
           position: absolute;
-          left: 49px;
+          left: 77px;
           right: -113px;
           line-height: 60px;
           width: 150px;
-          .new{
-            font-size: 35px;
-            color: #82b9e0;
-            position: absolute;
-            right: 16px;
-          }
         }
       }
     }
   }
 }
-

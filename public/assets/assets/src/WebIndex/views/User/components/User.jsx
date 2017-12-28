@@ -5,9 +5,10 @@ class Admin extends Component {
     constructor() {
         super();
     }
-
+    componentWillMount() {
+        console.log('user_will_mount');
+    }
     render() {
-        const { hiddenUserPermission } = this.props;
         return (
             <div className="userContainer">
                 <div className="userRight">

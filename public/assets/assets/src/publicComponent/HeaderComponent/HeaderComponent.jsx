@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CreateUser from '../../WebIndex/views/User/components/CreateUser';
+import CreateRole from '../../WebIndex/views/User/components/CreateRole';
+import CreateDepartment from '../../WebIndex/views/User/components/CreateDepartment';
 import cookieUtil from '../../lib/cookieUtil';
 import { Button, message } from 'antd';
 import './css/headerComponent.scss';
@@ -12,12 +14,13 @@ class HeaderComponent extends Component {
     constructor() {
         super();
         this.state = {
-            visible: false,
-            showAddBtn: false
+            userVisible: false,
+            showAddBtn: false,
+            roleVisible: false,
+            departmentVisible: false
         };
     }
     componentWillMount() {
-        const { fetchRoles, fetchDepartments } = this.props;
         if(cookieUtil.get('userInfor') !== '') {
             let permission = new Array(JSON.parse(cookieUtil.get('userInfo')).permission);
             for(let item of permission) {
@@ -25,8 +28,6 @@ class HeaderComponent extends Component {
                     this.setState({
                         showAddBtn: true
                     });
-                    fetchRoles();
-                    fetchDepartments();
                 }
             }
         }else {
@@ -35,28 +36,103 @@ class HeaderComponent extends Component {
             window.location.href = '/manageSystem/index#/login';
         }
     }
-    showModal = () => {
-        this.setState({ visible: true });
+    showUserModal = () => {
+        const { fetchRoles, fetchDepartments } = this.props;
+        this.setState({ userVisible: true });
+        fetchRoles();
+        fetchDepartments();
     };
-    handleCancel = () => {
-        this.setState({ visible: false });
+    showRoleModal = () => {
+        // const { fetchRoles, fetchDepartments } = this.props;
+        this.setState({ roleVisible: true });
+        // fetchRoles();
+        // fetchDepartments();
     };
-    handleCreate = () => {
+    showDepartmentModal = () => {
+        const { fetchDepartments } = this.props;
+        this.setState({ departmentVisible: true });
+        // fetchRoles();
+        fetchDepartments();
+    };
+    saveUserFormRef = (form) => {
+        this.form = form;
+    };
+    handleUserCancel = () => {
+        this.setState({ userVisible: false });
+    };
+    handleUserCreate = () => {
         const form = this.form;
         const { createUser } = this.props;
         form.validateFields((err, values) => {
             if (err) {
                 return;
             }
-            // console.log('Received values of form: ', values);
+            console.log('user_: ', values);
             createUser(values);
             form.resetFields();
-            this.setState({ visible: false });
+            this.setState({ userVisible: false });
         });
     };
-    saveFormRef = (form) => {
-        this.form = form;
+
+    saveRoleFormRef = (form) => {
+        this.roleForm = form;
     };
+
+    handleRoleCancel = () => {
+        this.setState({ roleVisible: false });
+    };
+    handleRoleCreate = () => {
+        const form = this.roleForm;
+        const { createRole } = this.props;
+        form.validateFields((err, values) => {
+            if (err) {
+                return;
+            }
+            console.log('role_: ', values);
+            let permissionArr = this.getPermission(values.permission);
+            console.log('----');
+            console.log(permissionArr);
+            values.permission = permissionArr;
+            createRole(values);
+            // console.log(permissionArr.length);
+            form.resetFields();
+            this.setState({ roleVisible: false });
+        });
+    };
+
+    getPermission = (permission) => {
+        let permissionArr = '[';
+        permission.forEach((item, index) => {
+            permissionArr += item;
+            if(index != permission.length - 1) {
+                permissionArr += ',';
+            }
+        });
+        permissionArr += ']';
+        return permissionArr;
+    };
+    saveDepartFormRef = (form) => {
+        this.departForm = form;
+    };
+
+    handleDepartCancel = () => {
+        this.setState({ departmentVisible: false });
+    };
+    handleDepartCreate = () => {
+        const form = this.departForm;
+        const { createDepartment } = this.props;
+        form.validateFields((err, values) => {
+            if (err) {
+                return;
+            }
+            console.log('department_ ', values);
+            createDepartment(values);
+            form.resetFields();
+            this.setState({ departmentVisible: false });
+        });
+    };
+
+
     render() {
         const { sidebarClosed = false, closeSideBar, roleData, departmentData } = this.props;
         const { showAddBtn } = this.state;
@@ -68,15 +144,39 @@ class HeaderComponent extends Component {
                 {
                     showAddBtn === true ? (
                         <div className="addUser">
-                            <Button type="primary" onClick={this.showModal}>新增用户</Button>
+                            <Button type="primary" onClick={this.showUserModal}>新增用户</Button>
                             <CreateUser
-                                ref={this.saveFormRef}
-                                visible={this.state.visible}
-                                onCancel={this.handleCancel}
-                                onCreate={this.handleCreate}
+                                ref={this.saveUserFormRef}
+                                visible={this.state.userVisible}
+                                onCancel={this.handleUserCancel}
+                                onCreate={this.handleUserCreate}
                                 roleData={roleData}
                                 departmentData={departmentData}
                                 title="新增用户"
+                                okText="创建"
+                                disable={false}
+                            />
+                            <Button type="primary" onClick={this.showRoleModal} style={{ marginLeft: 10, marginRight:10 }}>新增角色</Button>
+                            <CreateRole
+                                ref={this.saveRoleFormRef}
+                                visible={this.state.roleVisible}
+                                onCancel={this.handleRoleCancel}
+                                onCreate={this.handleRoleCreate}
+                                // roleData={roleData}
+                                // departmentData={departmentData}
+                                title="新增角色"
+                                okText="创建"
+                                disable={false}
+                            />
+                            <Button type="primary" onClick={this.showDepartmentModal}>新增部门</Button>
+                            <CreateDepartment
+                                ref={this.saveDepartFormRef}
+                                visible={this.state.departmentVisible}
+                                onCancel={this.handleDepartCancel}
+                                onCreate={this.handleDepartCreate}
+                                // roleData={roleData}
+                                departmentData={departmentData}
+                                title="新增部门"
                                 okText="创建"
                                 disable={false}
                             />
@@ -100,6 +200,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         createUser: (userCreated) => {
             dispatch(userAjax.createUser(userCreated));
+        },
+        createRole: (roleCreated) => {
+            dispatch(userAjax.createRole(roleCreated));
+        },
+        createDepartment: (departmentCreated) => {
+            dispatch(userAjax.createDepartment(departmentCreated));
         },
         fetchRoles: () => {
             dispatch(userAjax.fetchRoles());

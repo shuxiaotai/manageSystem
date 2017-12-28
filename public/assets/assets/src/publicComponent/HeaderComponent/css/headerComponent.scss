@@ -3,14 +3,17 @@
   background-color: #f3f3f4;
   height: 50px;
   position: fixed;
-  z-index: 20;
+  z-index: 1;
   border-bottom: 1px solid #d4d1d1;
-  max-width: 1037px;
+  //left: 220px;
+  padding-left: 220px;
+  transition: all .3s ease-in-out;
   display: flex;
-  flex-direction: row;
+  //max-width: 1053px;
   &.close{
-    left: 0;
-    max-width: 1288px;
+    //left: 0;
+    padding-left: 0;
+    //max-width: 1288px;
   }
   .sideButton{
     background-color: #529bcf;
@@ -27,7 +30,6 @@
     }
   }
   .addUser{
-    width: 200px;
     margin-left: 20px;
     margin-top: 9px;
   }

@@ -6,7 +6,6 @@ const MainContainer = (props) => {
     const { render, sidebarClosed = false, closeSideBar } = props;
     return(
         <div className={`main-content ${sidebarClosed ? 'close' : ''}`}>
-            <HeaderComponent sidebarClosed={ sidebarClosed } closeSideBar={ closeSideBar } />
             <div className={`show-content ${sidebarClosed ? 'close' : ''}`}>
                 { render() }
             </div>

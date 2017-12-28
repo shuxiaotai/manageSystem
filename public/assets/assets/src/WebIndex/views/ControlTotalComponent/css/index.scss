@@ -1,26 +1,39 @@
+body{
+  display: block;
+  position: relative;
+}
+#app {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
 .container-index{
-    height:100%;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .main-content{
     width: 100%;
     position: relative;
-    left:220px;
+    //left:220px;
     height: 100%;
+    padding-left: 220px;
     top: 0;
     background-color: #f3f3f4;
     transition: all .3s ease-in-out;
     &.close{
-      left: 0
+      //left: 0
+      padding-left: 0;
     }
     .show-content{
         position: relative;
         padding-top: 50px;
-        max-width: 1000px;
-        min-height: 588px;
+        height: 100%;
         &.close{
             //left: 110px;
-            max-width: 1228px;
         }
     }
 }

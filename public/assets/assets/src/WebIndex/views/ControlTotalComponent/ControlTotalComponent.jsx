@@ -4,11 +4,14 @@ import SideBar from '../Side/components/SideBar';
 import MainContent from './MainContent';
 import * as hideSideAction from '../../views/Side/actions/hideSideAction';
 import './css/index.scss';
+import HeaderComponent from '../../../publicComponent/HeaderComponent/HeaderComponent';
+
 
 const ControlTotalComponent = (props) => {
     const{ Content = '', sidebarClosed = false, closeSideBar, ...otherProps } = props;
     return(
         <div className="container-index">
+            <HeaderComponent sidebarClosed={ sidebarClosed } closeSideBar={ closeSideBar } />
             <SideBar sidebarClosed={ sidebarClosed } />
             <MainContent render={ () => <Content { ...otherProps } /> } sidebarClosed={ sidebarClosed } closeSideBar={ closeSideBar } />
         </div>

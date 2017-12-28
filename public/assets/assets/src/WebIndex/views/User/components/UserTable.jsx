@@ -24,7 +24,7 @@ import cookieUtil from '../../../../lib/cookieUtil';
 // }
 
 const pagination = {
-    defaultPageSize: 8
+    defaultPageSize: 12
 };
 
 let columns = [];
@@ -44,6 +44,7 @@ class UserTable extends Component {
             for(let item of permission) {
                 if(item.indexOf('1') !== -1) {
                     fetchUserInfor();
+                    console.log('user_table_will_mount');
                     console.log('管理员');
                     columns = [{
                         title: '员工代码',
@@ -95,6 +96,7 @@ class UserTable extends Component {
                     }];
                 }else if(item.indexOf('2') !== -1) {
                     fetchUserInfor();
+                    console.log('user_tabel_will_mount');
                     console.log('审核员');
                     columns = [{
                         title: '员工代码',
@@ -145,6 +147,7 @@ class UserTable extends Component {
                         )
                     }];
                 }else {
+                    console.log('user_table_will_mount');
                     message.info('您没有权限!');
                 }
             }
@@ -189,25 +192,27 @@ class UserTable extends Component {
         passUser(key, index);
     };
     onNoPassUser = (key, index) => {
-        // const { deleteUser } = this.props;
+        const { noPassUser } = this.props;
         // const dataSource = [...this.state.dataSource];
         this.setState({ selectedKey: key });
         this.setState({ selectedIndex: index });
         // console.log('delete');
 
-        // deleteUser(key, index);
+        noPassUser(key, index);
         // console.log(key);
         // console.log(index);
     };
     onUpdateUser = (key, index) => {
-        const　{ getCheckUser } = this.props;
+        const　{ getCheckUser, fetchRoles, fetchDepartments } = this.props;
         this.setState({ visible: true });
         this.setState({ selectedKey: key });
         this.setState({ selectedIndex: index });
         getCheckUser(key);
-        console.log('update');
-        console.log(key);
-        console.log(index);
+        fetchRoles();
+        fetchDepartments();
+        // console.log('update');
+        // console.log(key);
+        // console.log(index);
     };
 
     render() {
@@ -265,6 +270,15 @@ const mapDispatchToProps = (dispatch) => {
         passUser: (key, index) => {
             dispatch(userAjax.passUser(key, index));
         },
+        noPassUser: (key, index) => {
+            dispatch(userAjax.noPassUser(key, index));
+        },
+        fetchRoles: () => {
+            dispatch(userAjax.fetchRoles());
+        },
+        fetchDepartments: () => {
+            dispatch(userAjax.fetchDepartments());
+        }
     };
 };
 
